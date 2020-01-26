@@ -23,6 +23,8 @@ class mainWindow : public QWidget
         void hashSelectedSHA1();
         void hashSelectedSHA256();
 
+        /* Open wait hash window */
+        void showWaitHashWindow();
 
 
 

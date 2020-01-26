@@ -1,6 +1,7 @@
 #include "mainWindow.h"
 #include "helpwindow.h"
 #include "searchFileWindow.h"
+#include "waitHashWindow.h"
 
 
 /* Main Window Constructor */
@@ -185,10 +186,10 @@ mainWindow::mainWindow() : QWidget()
     footer->setGeometry(9, 399, 482, 44);
 
     /* 2.6.1 Link to web site */
+    QString link("<html><head/><body><p><a href=\"http://seb2lyon.info.free.fr\"><span style=\" text-decoration: underline; color:#0000ff;\">http://seb2lyon.info.free.fr</span></a></p></body></html>");
     webSite = new QLabel(footer);
     webSite->setGeometry(0, 14, 147, 16);
-    webSite->setText("<html><head/><body><p><a href=\"http://seb2lyon.info.free.fr\"><span style=\" text-decoration: underline; color:#0000ff;\">http://seb2lyon.info.free.fr</span></a></p></body></html>");
-    webSite->setTextFormat(Qt::RichText);
+    webSite->setText(link);
 
     /* 2.6.2 Quit button */
     quit = new QPushButton (footer);
@@ -207,7 +208,7 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(MD5, SIGNAL(clicked()), this, SLOT(hashSelectedMD5())); /* MD5 selected */
     QObject::connect(SHA1, SIGNAL(clicked()), this, SLOT(hashSelectedSHA1())); /* SHA1 selected */
     QObject::connect(SHA256, SIGNAL(clicked()), this, SLOT(hashSelectedSHA256())); /* SHA256 selected */
-
+    QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(showWaitHashWindow())); /* Open wait hash window */
 
 
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
@@ -254,8 +255,9 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
         QPalette palette2;
         palette2.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
         fileToChoose->setPalette(palette2);
-        fileToChoose->setText(tr("Aucun fichier séléctionné"));
+        fileToChoose->setText(tr("Aucun fichier sélectionné"));
         fileToChoose->setToolTip("");
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
     }
 
     file.close();
@@ -264,23 +266,39 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
 /* Hash selected */
 void mainWindow::hashSelectedMD4()
 {
-    hashAlgorith = "MD4";
+    hashAlgorith = "Md4";
 }
 
 void mainWindow::hashSelectedMD5()
 {
-    hashAlgorith = "MD5";
+    hashAlgorith = "Md5";
 }
 
 void mainWindow::hashSelectedSHA1()
 {
-    hashAlgorith = "SHA1";
+    hashAlgorith = "Sha1";
 }
 
 void mainWindow::hashSelectedSHA256()
 {
-    hashAlgorith = "SHA256";
+    hashAlgorith = "Sha256";
 }
+
+/* Call wait hash window */
+void mainWindow::showWaitHashWindow()
+{
+    if(fileSelectedPath.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Attention"), tr("<html><head></head><body><p>Aucun fichier sélectionné...<br/>Veuiller choisir un fichier en cliquant sur le bouton <span style=\" font-weight:600;\">\"Rechercher\"</span><br/>situé dans la zone <span style=\" color:#ff0000;\">1. Fichier à vérifier</span> ci-dessus.</p></body></html>"));
+    }
+    else
+    {
+        waitHashWindow waitWindow;
+        waitWindow.exec();
+    }
+}
+
+
 
 
 
