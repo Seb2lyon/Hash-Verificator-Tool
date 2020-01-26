@@ -1,4 +1,4 @@
-# Hash-Verificator-Tool
+# Hash Verificator Tool
 This program (in french and english) will calculate the numeric signature (hash) of a file of your choice.
 
 Many standard hash's algorithms available (MD4, MD5, SHA1, SHA-256).
