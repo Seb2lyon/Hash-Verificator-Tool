@@ -8,7 +8,7 @@ waitHashWindow::waitHashWindow() : QDialog()
 
     setFont(QFont("Arial", 10));
 
-    setWindowTitle(tr("Hash Verificator Tool - v. 1.0 - Calcul en cours..."));
+    setWindowTitle(tr("Hash Verificator Tool - v. 1.0 - Calcul..."));
     setWindowIcon(QIcon("images/icon.png"));
 
     QLabel *waitMessage = new QLabel(this);
