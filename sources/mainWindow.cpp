@@ -76,7 +76,7 @@ mainWindow::mainWindow() : QWidget()
     group2->setTitle(tr("2. Choix de l'algorithme"));
 
     /* 2.3.1 Radio Buttons Group 2 */
-    hashAlgorith = "MD5";
+    hashAlgorith = "Md5";
 
     MD4 = new QRadioButton(group2);
     MD4->setGeometry(10, 25, 51, 19);
@@ -106,6 +106,7 @@ mainWindow::mainWindow() : QWidget()
     hash1->setText("Hash : ");
 
     /* 2.4.2 Line edit Group 3 */
+    hash = "";
     hashResult = new QLineEdit(group3);
     hashResult->setGeometry(53, 28, 420, 21);
     hashResult->setFont(QFont("Arial", 8));
@@ -113,6 +114,7 @@ mainWindow::mainWindow() : QWidget()
     palette2.setColor(QPalette::Base, QColor(235, 235, 235, 255));
     hashResult->setPalette(palette2);
     hashResult->setReadOnly(true);
+    hashResult->setText(hash);
 
     /* 2.4.3 Calculate Button Group 3 */
     calculateButton = new QPushButton(group3);
@@ -212,7 +214,7 @@ mainWindow::mainWindow() : QWidget()
 
 
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
-
+    QObject::connect(quit, SIGNAL(clicked()), this, SLOT(quitApp())); /* Quit application */
 }
 
 /* Call search file window */
@@ -293,11 +295,54 @@ void mainWindow::showWaitHashWindow()
     }
     else
     {
-        waitHashWindow waitWindow;
-        waitWindow.exec();
+        /* Open waitHashWindow */
+
+        hashCalculator();
     }
 }
 
+/* Hash calculator function */
+void mainWindow::hashCalculator()
+{
+    QFile *file = new QFile(fileSelectedPath);
+
+    if(file->open(QIODevice::ReadOnly))
+    {
+        if(hashAlgorith == "Md4")
+        {
+            hasher = new QCryptographicHash(QCryptographicHash::Md4);
+        }
+        else if(hashAlgorith == "Md5")
+        {
+            hasher = new QCryptographicHash(QCryptographicHash::Md5);
+        }
+        else if(hashAlgorith == "Sha1")
+        {
+            hasher = new QCryptographicHash(QCryptographicHash::Sha1);
+        }
+        else if(hashAlgorith == "Sha256")
+        {
+            hasher = new QCryptographicHash(QCryptographicHash::Sha256);
+        }
+
+        hasher->addData(file);
+        hash = hasher->result().toHex();
+
+        hashResult->setText(hash);
+    }
+}
+
+
+
+
+
+
+
+/* Quit application */
+void mainWindow::quitApp()
+{
+    QMessageBox::question(this, tr("Quitter l'application"), tr("Voulez-vous vraiment quitter Hash Verificator Tool ?"));
+}
 
 
 
@@ -310,3 +355,5 @@ void mainWindow::showHelpWindow()
     helpWindow appHelpWindow;
     appHelpWindow.exec();
 }
+
+/* TODO : Allow drag & drop */

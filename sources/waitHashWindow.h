@@ -2,7 +2,6 @@
 #define WAITHASHWINDOW_H
 
 #include <QtWidgets>
-#include "mainWindow.h"
 
 class waitHashWindow : public QDialog
 {

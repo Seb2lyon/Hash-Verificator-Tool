@@ -9,6 +9,7 @@ class mainWindow : public QWidget
 
     public:
     	mainWindow();
+        void hashCalculator();
 
     public slots:
         /* Call search file window */
@@ -28,8 +29,13 @@ class mainWindow : public QWidget
 
 
 
+
+
         /* Call help window */
         void showHelpWindow();
+
+        /* Quit application */
+        void quitApp();
 
     private:
         /* Group 1 */
@@ -66,6 +72,12 @@ class mainWindow : public QWidget
 
         /* Algorith for hash */
         QString hashAlgorith;
+
+        /* Hasher */
+        QCryptographicHash *hasher;
+
+        /* Hash result */
+        QString hash;
 };
 
 #endif // MAINWINDOW_H
