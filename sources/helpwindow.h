@@ -2,7 +2,6 @@
 #define HELPWINDOW_H
 
 #include <QtWidgets>
-#include "mainWindow.h"
 
 class helpWindow : public QDialog
 {
