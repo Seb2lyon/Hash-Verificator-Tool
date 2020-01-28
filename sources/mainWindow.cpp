@@ -8,6 +8,8 @@
 mainWindow::mainWindow() : QWidget()
 { 
     /* Main Window */
+    setAcceptDrops(true);
+
     setFixedSize(500, 550);
 
     QPalette palette1;
@@ -263,6 +265,78 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
     }
 
     file.close();
+}
+
+
+/* Drag file function */
+void mainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if(event->mimeData()->hasUrls())
+    {
+        event->acceptProposedAction();
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
+        fileSelectedPath = "";
+        QPalette palette2;
+        palette2.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+        fileToChoose->setPalette(palette2);
+        fileToChoose->setText(tr("Aucun fichier sélectionné"));
+        fileToChoose->setToolTip("");
+    }
+}
+
+/* Drop file function */
+void mainWindow::dropEvent(QDropEvent *event)
+{
+    QList<QUrl> urlList = event->mimeData()->urls();
+    int nbrUrl = urlList.count();
+
+    if(urlList.isEmpty() || nbrUrl == 0)
+    {
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
+        fileSelectedPath = "";
+        QPalette palette1;
+        palette1.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+        fileToChoose->setPalette(palette1);
+        fileToChoose->setText(tr("Aucun fichier sélectionné"));
+        fileToChoose->setToolTip("");
+    }
+    else if(nbrUrl > 1)
+    {
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Vous ne pouvez sélectionner qu'un seul fichier...</span><br/>Veuillez réessayer !</body></html>"));
+        fileSelectedPath = "";
+        QPalette palette1;
+        palette1.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+        fileToChoose->setPalette(palette1);
+        fileToChoose->setText(tr("Aucun fichier sélectionné"));
+        fileToChoose->setToolTip("");
+    }
+    else
+    {
+        const QUrl url = urlList.at(0);
+        fileSelectedPath = url.toLocalFile();
+
+        QFileInfo infoFile(fileSelectedPath);
+        QString fileName = infoFile.fileName();
+        int fileNameSize = fileName.size();
+        QPalette palette1;
+        palette1.setColor(QPalette::WindowText, QColor(0, 0, 255, 255));
+        fileToChoose->setPalette(palette1);
+
+        if(fileNameSize > 30)
+        {
+            QString shortName = fileName.mid(0, 25) + " (...)";
+            fileToChoose->setText(shortName);
+            fileToChoose->setToolTip(fileName);
+        }
+        else
+        {
+            fileToChoose->setText(fileName);
+            fileToChoose->setToolTip("");
+        }
+    }
 }
 
 /* Hash selected */
