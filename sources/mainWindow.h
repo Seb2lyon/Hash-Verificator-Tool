@@ -36,8 +36,12 @@ class mainWindow : public QWidget
         /* Call help window */
         void showHelpWindow();
 
-        /* Quit application */
+        /* Quit application 1/2 */
         void quitApp();
+
+    signals:
+        /* Quit application 2/2 */
+        void closeApp();
 
     private:
         /* Group 1 */

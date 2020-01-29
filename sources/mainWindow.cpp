@@ -193,6 +193,7 @@ mainWindow::mainWindow() : QWidget()
     QString link("<html><head/><body><p><a href=\"http://seb2lyon.info.free.fr\"><span style=\" text-decoration: underline; color:#0000ff;\">http://seb2lyon.info.free.fr</span></a></p></body></html>");
     webSite = new QLabel(footer);
     webSite->setGeometry(0, 14, 147, 16);
+    webSite->setOpenExternalLinks(true);
     webSite->setText(link);
 
     /* 2.6.2 Quit button */
@@ -216,7 +217,8 @@ mainWindow::mainWindow() : QWidget()
 
 
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
-    QObject::connect(quit, SIGNAL(clicked()), this, SLOT(quitApp())); /* Quit application */
+    QObject::connect(quit, SIGNAL(clicked()), this, SLOT(quitApp())); /* Quit application 1/2 */
+    QObject::connect(this, SIGNAL(closeApp()), qApp, SLOT(quit()));  /* Quit application 2/2 */
 }
 
 /* Call search file window */
@@ -415,13 +417,13 @@ void mainWindow::hashCalculator()
 /* Quit application */
 void mainWindow::quitApp()
 {
-    QMessageBox::question(this, tr("Quitter l'application"), tr("Voulez-vous vraiment quitter Hash Verificator Tool ?"));
+    int quitAction = QMessageBox::question(this, tr("Quitter"), tr("Voulez-vous vraiment quitter l'application\nHash Verificator Tool ?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+
+    if(quitAction == QMessageBox::Yes)
+    {
+        emit closeApp();
+    }
 }
-
-
-
-
-
 
 /* Call help window */
 void mainWindow::showHelpWindow()
@@ -429,5 +431,3 @@ void mainWindow::showHelpWindow()
     helpWindow appHelpWindow;
     appHelpWindow.exec();
 }
-
-/* TODO : Allow drag & drop */
