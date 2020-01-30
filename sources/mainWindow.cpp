@@ -8,6 +8,8 @@
 mainWindow::mainWindow() : QWidget()
 { 
     /* Main Window */
+    setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowMinimizeButtonHint & ~Qt::WindowMaximizeButtonHint);
+
     setAcceptDrops(true);
 
     setFixedSize(500, 550);
@@ -269,7 +271,6 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
     file.close();
 }
 
-
 /* Drag file function */
 void mainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
@@ -425,9 +426,16 @@ void mainWindow::quitApp()
     }
 }
 
+/* Close window */
+void mainWindow::closeEvent(QCloseEvent *event2)
+{
+    event2->ignore();
+    quitApp();
+}
+
 /* Call help window */
 void mainWindow::showHelpWindow()
 {
-    helpWindow appHelpWindow;
+    helpWindow appHelpWindow(this);
     appHelpWindow.exec();
 }

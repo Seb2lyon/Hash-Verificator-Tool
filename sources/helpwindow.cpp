@@ -2,10 +2,12 @@
 
 
 /* Help Window Constructor */
-helpWindow::helpWindow() : QDialog()
+helpWindow::helpWindow(mainWindow *parent) : QDialog(parent)
 {
     /* Help Window */
     setFixedSize(400, 450);
+
+    setWindowFlags((windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowContextHelpButtonHint);
 
     QPalette palette1;
     palette1.setColor(QPalette::Window, QColor(225, 225, 225, 255));
@@ -75,4 +77,9 @@ helpWindow::helpWindow() : QDialog()
     closeButton->setText(tr("Fermer"));
 
     QObject::connect(closeButton, SIGNAL(clicked()), this, SLOT(close()));
+}
+
+void helpWindow::closeEvent(QCloseEvent *event)
+{
+    event->accept();
 }

@@ -12,6 +12,7 @@ class mainWindow : public QWidget
         void hashCalculator();
         void dragEnterEvent(QDragEnterEvent *event); /* Drag file function */
         void dropEvent(QDropEvent *event); /* Drop file function */
+        void closeEvent(QCloseEvent *event2); /* Close window */
 
     public slots:
         /* Call search file window */
