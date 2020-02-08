@@ -9,10 +9,16 @@ class mainWindow : public QWidget
 
     public:
     	mainWindow();
-        void hashCalculator();
         void dragEnterEvent(QDragEnterEvent *event); /* Drag file function */
         void dropEvent(QDropEvent *event); /* Drop file function */
         void closeEvent(QCloseEvent *event2); /* Close window */
+
+        /* Getters */
+        QString getFileSelectedPath();
+        QString getHashAlgorith();
+
+        /* Setters */
+        void setHash(QString hashString);
 
     public slots:
         /* Call search file window */
@@ -79,9 +85,6 @@ class mainWindow : public QWidget
 
         /* Algorith for hash */
         QString hashAlgorith;
-
-        /* Hasher */
-        QCryptographicHash *hasher;
 
         /* Hash result */
         QString hash;

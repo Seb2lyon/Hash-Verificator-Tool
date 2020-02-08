@@ -372,38 +372,8 @@ void mainWindow::showWaitHashWindow()
     }
     else
     {
-        /* Open waitHashWindow */
-
-        hashCalculator();
-    }
-}
-
-/* Hash calculator function */
-void mainWindow::hashCalculator()
-{
-    QFile *file = new QFile(fileSelectedPath);
-
-    if(file->open(QIODevice::ReadOnly))
-    {
-        if(hashAlgorith == "Md4")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Md4);
-        }
-        else if(hashAlgorith == "Md5")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Md5);
-        }
-        else if(hashAlgorith == "Sha1")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Sha1);
-        }
-        else if(hashAlgorith == "Sha256")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Sha256);
-        }
-
-        hasher->addData(file);
-        hash = hasher->result().toHex();
+        waitHashWindow appWaitWindow(this);
+        appWaitWindow.exec();
 
         hashResult->setText(hash);
     }
@@ -438,4 +408,21 @@ void mainWindow::showHelpWindow()
 {
     helpWindow appHelpWindow(this);
     appHelpWindow.exec();
+}
+
+/* Getters */
+QString mainWindow::getFileSelectedPath()
+{
+    return fileSelectedPath;
+}
+
+QString mainWindow::getHashAlgorith()
+{
+    return hashAlgorith;
+}
+
+/* Setters */
+void mainWindow::setHash(QString hashString)
+{
+    hash = hashString;
 }
