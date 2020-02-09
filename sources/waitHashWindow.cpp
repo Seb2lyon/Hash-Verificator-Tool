@@ -38,11 +38,11 @@ waitHashWindow::waitHashWindow(mainWindow *parent) : QDialog(parent)
 /* Hash calculator function */
 void waitHashWindow::hashCalculator()
 {
-    QFile *file = new QFile(parentLink->getFileSelectedPath());
+    QFile file(parentLink->getFileSelectedPath());
 
-    if(file->open(QIODevice::ReadOnly))
+    if(file.open(QIODevice::ReadOnly))
     {
-        int partFile = (file->size()) / 1024;
+        int partFile = (file.size()) / 1024;
 
         int loop = 1;
 
@@ -65,14 +65,16 @@ void waitHashWindow::hashCalculator()
             hasher = new QCryptographicHash(QCryptographicHash::Sha256);
         }
 
-        while(!file->atEnd())
+        while(!file.atEnd())
         {
-            hasher->addData(file->read(1024));
+            hasher->addData(file.read(1024));
             percent = (loop * 100) / partFile;
             progressBar->setValue(percent);
             loop++;
         }
 
         parentLink->setHash(hasher->result().toHex());
+
+        file.close();
     }
 }

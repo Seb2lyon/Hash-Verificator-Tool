@@ -36,6 +36,9 @@ class mainWindow : public QWidget
         /* Open wait hash window */
         void showWaitHashWindow();
 
+        /* Upper case checkbox */
+        void upperCaseState(int state);
+
 
 
 

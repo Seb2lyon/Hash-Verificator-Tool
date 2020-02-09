@@ -216,6 +216,7 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(SHA1, SIGNAL(clicked()), this, SLOT(hashSelectedSHA1())); /* SHA1 selected */
     QObject::connect(SHA256, SIGNAL(clicked()), this, SLOT(hashSelectedSHA256())); /* SHA256 selected */
     QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(showWaitHashWindow())); /* Open wait hash window */
+    QObject::connect(upperCase, SIGNAL(stateChanged(int)), this, SLOT(upperCaseState(int))); /* Upper case checkbox */
 
 
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
@@ -372,12 +373,50 @@ void mainWindow::showWaitHashWindow()
     }
     else
     {
+        hash = "";
+
         waitHashWindow appWaitWindow(this);
         appWaitWindow.exec();
+
+        if(upperCase->isChecked())
+        {
+            hash = hash.toUpper();
+        }
+        else
+        {
+            hash = hash.toLower();
+        }
 
         hashResult->setText(hash);
     }
 }
+
+/* Upper case checkbox */
+void mainWindow::upperCaseState(int state)
+{
+    if(!hash.isEmpty())
+    {
+        if(state == Qt::Unchecked)
+        {
+            hash = hash.toLower();
+            hashResult->setText(hash);
+        }
+        else if(state == Qt::Checked)
+        {
+            hash = hash.toUpper();
+            hashResult->setText(hash);
+        }
+    }
+    else
+    {
+        hashResult->setText("");
+    }
+}
+
+
+
+
+
 
 
 
@@ -426,3 +465,6 @@ void mainWindow::setHash(QString hashString)
 {
     hash = hashString;
 }
+
+
+/* TODO : crash when changing the file */
