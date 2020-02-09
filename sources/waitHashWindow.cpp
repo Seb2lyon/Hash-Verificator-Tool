@@ -42,38 +42,54 @@ void waitHashWindow::hashCalculator()
 
     if(file.open(QIODevice::ReadOnly))
     {
-        int partFile = (file.size()) / 1024;
+        if(file.size() == 0)
+        {
+            progressBar->setValue(100);
+            parentLink->setHash("");
+            QMessageBox::information(this, tr("Fichier vide"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Fichier vide...</span><br/>Aucun hash n'a pu être calculé !</p></body></html>"));
+        }
+        else
+        {
+            int partFile = (file.size()) / 1024;
 
-        int loop = 1;
+            int loop = 1;
 
-        int percent = 0;
-        
-        if(parentLink->getHashAlgorith() == "Md4")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Md4);
-        }
-        else if(parentLink->getHashAlgorith() == "Md5")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Md5);
-        }
-        else if(parentLink->getHashAlgorith() == "Sha1")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Sha1);
-        }
-        else if(parentLink->getHashAlgorith() == "Sha256")
-        {
-            hasher = new QCryptographicHash(QCryptographicHash::Sha256);
-        }
+            int percent = 0;
 
-        while(!file.atEnd())
-        {
-            hasher->addData(file.read(1024));
-            percent = (loop * 100) / partFile;
-            progressBar->setValue(percent);
-            loop++;
-        }
+            if(parentLink->getHashAlgorith() == "Md4")
+            {
+                hasher = new QCryptographicHash(QCryptographicHash::Md4);
+            }
+            else if(parentLink->getHashAlgorith() == "Md5")
+            {
+                hasher = new QCryptographicHash(QCryptographicHash::Md5);
+            }
+            else if(parentLink->getHashAlgorith() == "Sha1")
+            {
+                hasher = new QCryptographicHash(QCryptographicHash::Sha1);
+            }
+            else if(parentLink->getHashAlgorith() == "Sha256")
+            {
+                hasher = new QCryptographicHash(QCryptographicHash::Sha256);
+            }
 
-        parentLink->setHash(hasher->result().toHex());
+            while(!file.atEnd())
+            {
+                hasher->addData(file.read(1024));
+                if(partFile > 0)
+                {
+                    percent = (loop * 100) / partFile;
+                    progressBar->setValue(percent);
+                    loop++;
+                }
+                else
+                {
+                    progressBar->setValue(100);
+                }
+            }
+
+            parentLink->setHash(hasher->result().toHex());
+        }
 
         file.close();
     }

@@ -219,6 +219,10 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(upperCase, SIGNAL(stateChanged(int)), this, SLOT(upperCaseState(int))); /* Upper case checkbox */
 
 
+
+
+
+
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
     QObject::connect(quit, SIGNAL(clicked()), this, SLOT(quitApp())); /* Quit application 1/2 */
     QObject::connect(this, SIGNAL(closeApp()), qApp, SLOT(quit()));  /* Quit application 2/2 */
@@ -424,6 +428,9 @@ void mainWindow::upperCaseState(int state)
 
 
 
+
+
+
 /* Quit application */
 void mainWindow::quitApp()
 {
@@ -465,6 +472,3 @@ void mainWindow::setHash(QString hashString)
 {
     hash = hashString;
 }
-
-
-/* TODO : crash when changing the file */

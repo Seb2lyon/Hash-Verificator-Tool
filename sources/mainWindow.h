@@ -43,6 +43,9 @@ class mainWindow : public QWidget
 
 
 
+
+
+
         /* Call help window */
         void showHelpWindow();
 
