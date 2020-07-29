@@ -377,21 +377,36 @@ void mainWindow::showWaitHashWindow()
     }
     else
     {
-        hash = "";
+        QFile file(getFileSelectedPath());
 
-        waitHashWindow appWaitWindow(this);
-        appWaitWindow.exec();
-
-        if(upperCase->isChecked())
+        if(file.open(QIODevice::ReadOnly))
         {
-            hash = hash.toUpper();
-        }
-        else
-        {
-            hash = hash.toLower();
-        }
+            if(file.size() == 0)
+            {
+                QMessageBox::information(this, tr("Fichier vide"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Fichier vide...</span><br/>Aucun hash n'a pu être calculé !</p></body></html>"));
+                file.close();
+            }
+            else
+            {
+                file.close();
 
-        hashResult->setText(hash);
+                hash = "";
+
+                waitHashWindow appWaitWindow(this);
+                appWaitWindow.exec();
+
+                if(upperCase->isChecked())
+                {
+                    hash = hash.toUpper();
+                }
+                else
+                {
+                    hash = hash.toLower();
+                }
+
+                hashResult->setText(hash);
+            }
+        }
     }
 }
 

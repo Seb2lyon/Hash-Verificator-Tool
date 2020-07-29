@@ -15,7 +15,7 @@ waitHashWindow::waitHashWindow(mainWindow *parent) : QDialog(parent)
     setWindowTitle(tr("Hash Verificator Tool - v. 1.0 - Calcul..."));
     setWindowIcon(QIcon("images/icon.png"));
 
-    QLabel *waitMessage = new QLabel(this);
+    waitMessage = new QLabel(this);
     waitMessage->setGeometry(9, 20, 282, 44);
     waitMessage->setFont(QFont("Arial", 12, QFont::Bold, true));
     waitMessage->setText(tr("Veuillez patienter...\nCalcul du hash en cours !!"));
@@ -29,68 +29,27 @@ waitHashWindow::waitHashWindow(mainWindow *parent) : QDialog(parent)
     cancelButton->setGeometry(107, 160, 85, 25);
     cancelButton->setText(tr("Annuler"));
 
-    hashCalculator();
+    thread = new hashThread(parent);
+    thread->start();
 
+    QObject::connect(thread, SIGNAL(changeValue(int)), this, SLOT(newValue(int)));
+    QObject::connect(thread, SIGNAL(complete()), this, SLOT(endProcess()));
     QObject::connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
 }
 
-
-/* Hash calculator function */
-void waitHashWindow::hashCalculator()
+/* Update progress bar value */
+void waitHashWindow::newValue(int value)
 {
-    QFile file(parentLink->getFileSelectedPath());
+    progressBar->setValue(value);
+}
 
-    if(file.open(QIODevice::ReadOnly))
-    {
-        if(file.size() == 0)
-        {
-            progressBar->setValue(100);
-            parentLink->setHash("");
-            QMessageBox::information(this, tr("Fichier vide"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Fichier vide...</span><br/>Aucun hash n'a pu être calculé !</p></body></html>"));
-        }
-        else
-        {
-            int partFile = (file.size()) / 1024;
-
-            int loop = 1;
-
-            int percent = 0;
-
-            if(parentLink->getHashAlgorith() == "Md4")
-            {
-                hasher = new QCryptographicHash(QCryptographicHash::Md4);
-            }
-            else if(parentLink->getHashAlgorith() == "Md5")
-            {
-                hasher = new QCryptographicHash(QCryptographicHash::Md5);
-            }
-            else if(parentLink->getHashAlgorith() == "Sha1")
-            {
-                hasher = new QCryptographicHash(QCryptographicHash::Sha1);
-            }
-            else if(parentLink->getHashAlgorith() == "Sha256")
-            {
-                hasher = new QCryptographicHash(QCryptographicHash::Sha256);
-            }
-
-            while(!file.atEnd())
-            {
-                hasher->addData(file.read(1024));
-                if(partFile > 0)
-                {
-                    percent = (loop * 100) / partFile;
-                    progressBar->setValue(percent);
-                    loop++;
-                }
-                else
-                {
-                    progressBar->setValue(100);
-                }
-            }
-
-            parentLink->setHash(hasher->result().toHex());
-        }
-
-        file.close();
-    }
+/* End of the hash calculation process */
+void waitHashWindow::endProcess()
+{
+    QPalette palette1;
+    palette1.setColor(QPalette::WindowText, QColor(0, 0, 255, 255));
+    waitMessage->setPalette(palette1);
+    waitMessage->setText(tr("Le calcul du hash est terminé !!!"));
+    cancelButton->setFont(QFont("Arial", 10, QFont::Bold));
+    cancelButton->setText(tr("Terminé"));
 }

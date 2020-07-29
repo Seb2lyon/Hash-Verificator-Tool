@@ -1,6 +1,7 @@
 QT += widgets
 
 SOURCES += \
+    hashThread.cpp \
     helpWindow.cpp \
     main.cpp \
     mainWindow.cpp \
@@ -8,6 +9,7 @@ SOURCES += \
     waitHashWindow.cpp
 
 HEADERS += \
+    hashThread.h \
     helpWindow.h \
     mainWindow.h \
     searchFileWindow.h \

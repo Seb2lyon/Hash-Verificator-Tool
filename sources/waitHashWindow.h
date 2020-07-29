@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include "mainWindow.h"
+#include "hashThread.h"
 
 class waitHashWindow : public QDialog
 {
@@ -10,13 +11,17 @@ class waitHashWindow : public QDialog
 
     public:
         waitHashWindow(mainWindow *parent);
-        void hashCalculator(); /* Launch hash calculator */
 
     private:
         mainWindow *parentLink; /* Main window link */
+        QLabel *waitMessage; /* Wait message */
         QProgressBar *progressBar; /* Progress bar */
         QPushButton *cancelButton; /* Cancel button */
-        QCryptographicHash *hasher; /* Hasher */
+        hashThread *thread; /* Thread for hash calculator */
+
+    private slots:
+        void newValue(int); /* Update progress bar value */
+        void endProcess(); /* End of the hash calculation process */
 };
 
 #endif // WAITHASHWINDOW_H
