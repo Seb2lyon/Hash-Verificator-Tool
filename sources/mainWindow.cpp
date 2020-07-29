@@ -217,7 +217,8 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(SHA256, SIGNAL(clicked()), this, SLOT(hashSelectedSHA256())); /* SHA256 selected */
     QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(showWaitHashWindow())); /* Open wait hash window */
     QObject::connect(upperCase, SIGNAL(stateChanged(int)), this, SLOT(upperCaseState(int))); /* Upper case checkbox */
-    QObject::connect(copy, SIGNAL(clicked()), this, SLOT(copyHashToClipboard()));
+    QObject::connect(copy, SIGNAL(clicked()), this, SLOT(copyHashToClipboard())); /* Copy hash to clipboard */
+    QObject::connect(save, SIGNAL(clicked()), this, SLOT(saveHash())); /* Save Hash in a file */
 
 
 
@@ -449,6 +450,27 @@ void mainWindow::copyHashToClipboard()
         QClipboard *clipboard = QApplication::clipboard();
         clipboard->setText(hash);
         QMessageBox::information(this, tr("Copie dans le presse-papier"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Copie effectuée avec succès...</span><br/>Le hash est bien copié dans le presse-papier !</p></body></html>"));
+    }
+}
+
+/* Save hash in a file */
+void mainWindow::saveHash()
+{
+    if(hash == "")
+    {
+        QMessageBox::warning(this, tr("Aucun hash calculé"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash calculé...</span><br/>Veuillez choisir un fichier puis calculer son hash en cliquant sur le bouton <span style=\" font-weight:600;\">\"Calculer\"</span> situé dans la zone <span style=\" color:#ff0000;\">3. Hash du fichier</span> ci-dessus.</p></body></html>"));
+    }
+    else
+    {
+        contentFile = new QString;
+        contentFile->append("=====================================================================\n");
+        contentFile->append(tr("Généré par le logiciel Hash Verificator Tool v. 1.0\n"));
+        contentFile->append(tr("Le "));
+        contentFile->append(QDateTime::currentDateTime().toString("dd/MM/yyyy HH:mm:ss"));
+        contentFile->append("\n");
+        contentFile->append(tr("Créé et développé par Seb2lyon\n"));
+        contentFile->append("http://seb2lyon.info.free.fr\n");
+        contentFile->append("=====================================================================\n\n");
     }
 }
 

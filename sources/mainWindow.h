@@ -42,6 +42,10 @@ class mainWindow : public QWidget
         /* Copy hash to clipboard */
         void copyHashToClipboard();
 
+        /* Save Hash in a file */
+        void saveHash();
+
+
 
 
 
@@ -99,6 +103,9 @@ class mainWindow : public QWidget
 
         /* Hash result */
         QString hash;
+
+        /* Save hash content */
+        QString *contentFile;
 };
 
 #endif // MAINWINDOW_H
