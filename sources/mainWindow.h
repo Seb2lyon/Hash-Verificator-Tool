@@ -39,6 +39,11 @@ class mainWindow : public QWidget
         /* Upper case checkbox */
         void upperCaseState(int state);
 
+        /* Copy hash to clipboard */
+        void copyHashToClipboard();
+
+
+
 
 
 

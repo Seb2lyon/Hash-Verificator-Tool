@@ -217,6 +217,11 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(SHA256, SIGNAL(clicked()), this, SLOT(hashSelectedSHA256())); /* SHA256 selected */
     QObject::connect(calculateButton, SIGNAL(clicked()), this, SLOT(showWaitHashWindow())); /* Open wait hash window */
     QObject::connect(upperCase, SIGNAL(stateChanged(int)), this, SLOT(upperCaseState(int))); /* Upper case checkbox */
+    QObject::connect(copy, SIGNAL(clicked()), this, SLOT(copyHashToClipboard()));
+
+
+
+
 
 
 
@@ -373,7 +378,7 @@ void mainWindow::showWaitHashWindow()
 {
     if(fileSelectedPath.isEmpty())
     {
-        QMessageBox::warning(this, tr("Attention"), tr("<html><head></head><body><p>Aucun fichier sélectionné...<br/>Veuiller choisir un fichier en cliquant sur le bouton <span style=\" font-weight:600;\">\"Rechercher\"</span><br/>situé dans la zone <span style=\" color:#ff0000;\">1. Fichier à vérifier</span> ci-dessus.</p></body></html>"));
+        QMessageBox::warning(this, tr("Attention"), tr("<html><head></head><body><p>Aucun fichier sélectionné...<br/>Veuillez choisir un fichier en cliquant sur le bouton <span style=\" font-weight:600;\">\"Rechercher\"</span><br/>situé dans la zone <span style=\" color:#ff0000;\">1. Fichier à vérifier</span> ci-dessus.</p></body></html>"));
     }
     else
     {
@@ -429,6 +434,21 @@ void mainWindow::upperCaseState(int state)
     else
     {
         hashResult->setText("");
+    }
+}
+
+/* Copy hash to clipboard */
+void mainWindow::copyHashToClipboard()
+{
+    if(hash == "")
+    {
+        QMessageBox::warning(this, tr("Aucun hash calculé"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash calculé...</span><br/>Veuillez choisir un fichier puis calculer son hash en cliquant sur le bouton <span style=\" font-weight:600;\">\"Calculer\"</span> situé dans la zone <span style=\" color:#ff0000;\">3. Hash du fichier</span> ci-dessus.</p></body></html>"));
+    }
+    else
+    {
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(hash);
+        QMessageBox::information(this, tr("Copie dans le presse-papier"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Copie effectuée avec succès...</span><br/>Le hash est bien copié dans le presse-papier !</p></body></html>"));
     }
 }
 
