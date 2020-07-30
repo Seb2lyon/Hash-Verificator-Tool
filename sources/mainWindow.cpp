@@ -219,7 +219,7 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(upperCase, SIGNAL(stateChanged(int)), this, SLOT(upperCaseState(int))); /* Upper case checkbox */
     QObject::connect(copy, SIGNAL(clicked()), this, SLOT(copyHashToClipboard())); /* Copy hash to clipboard */
     QObject::connect(save, SIGNAL(clicked()), this, SLOT(saveHash())); /* Save Hash in a file */
-
+    QObject::connect(paste, SIGNAL(clicked()), this, SLOT(pasteHashFromClipboard())); /* Paste hash from clipboard */
 
 
 
@@ -461,7 +461,7 @@ void mainWindow::copyHashToClipboard()
     {
         QClipboard *clipboard = QApplication::clipboard();
         clipboard->setText(hash);
-        QMessageBox::information(this, tr("Copie dans le presse-papier"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Copie effectuée avec succès...</span><br/>Le hash est bien copié dans le presse-papier !</p></body></html>"));
+        QMessageBox::information(this, tr("Copie dans la mémoire tampon"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Copie effectuée avec succès...</span><br/>Le hash est bien copié dans la mémoire de votre ordinateur !</p></body></html>"));
     }
 }
 
@@ -570,7 +570,32 @@ void mainWindow::saveFileTreatment(QString completeFilePath)
     }
 }
 
+/* Paste hash from clipboard */
+void mainWindow::pasteHashFromClipboard()
+{
+    hashInput->setText("");
 
+    QClipboard *clipboard = QApplication::clipboard();
+    QString contentOfClipboard = clipboard->text();
+
+    QRegularExpression hexMatcher32("^[0-9A-F]{32}$", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression hexMatcher40("^[0-9A-F]{40}$", QRegularExpression::CaseInsensitiveOption);
+    QRegularExpression hexMatcher64("^[0-9A-F]{64}$", QRegularExpression::CaseInsensitiveOption);
+
+    QRegularExpressionMatch match32 = hexMatcher32.match(contentOfClipboard);
+    QRegularExpressionMatch match40 = hexMatcher40.match(contentOfClipboard);
+    QRegularExpressionMatch match64 = hexMatcher64.match(contentOfClipboard);
+
+
+    if(match32.hasMatch() || match40.hasMatch() || match64.hasMatch())
+    {
+        hashInput->setText(contentOfClipboard);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Aucun hash dans la mémoire tampon"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash dans la mémoire de votre ordinateur...</span><br/>Assurez-vous de bien copier un hash avant de cliquer sur le bouton <span style=\" font-weight:600;\">\"Coller\"</span>.</p></body></html>"));
+    }
+}
 
 
 

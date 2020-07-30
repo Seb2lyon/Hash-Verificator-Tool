@@ -48,6 +48,9 @@ class mainWindow : public QWidget
         /* Treatment on saving file */
         void saveFileTreatment(QString completeFilePath);
 
+        /* Paste hash from clipboard */
+        void pasteHashFromClipboard();
+
 
 
 
