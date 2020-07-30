@@ -53,3 +53,4 @@ void waitHashWindow::endProcess()
     cancelButton->setFont(QFont("Arial", 10, QFont::Bold));
     cancelButton->setText(tr("Terminé"));
 }
+

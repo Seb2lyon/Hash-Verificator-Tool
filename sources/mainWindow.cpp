@@ -172,20 +172,14 @@ mainWindow::mainWindow() : QWidget()
     icon_verify->setGeometry(200, 62, 20, 20);
     icon_verify->setPixmap(QPixmap(""));
 
-    /* If the 2 hashes are identical : QPixmap("images/same.png") */
-    /* If the 2 hashes are different : QPixmap("images/different.png") */
-
     /* 2.5.6 Result verification Group 4 */
     verify = new QLabel(group4);
     verify->setGeometry(225, 64, 121, 16);
     verify->setFont(QFont("Arial", 10, QFont::Bold));
     QPalette palette3;
-    palette3.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+    palette3.setColor(QPalette::WindowText, QColor(255, 255, 255, 255));
     verify->setPalette(palette3);
     verify->setText(tr(""));
-
-    /* If the 2 hashes are identical : palette3.setColor(QPalette::WindowText, QColor(0, 170, 0, 255)) + verify->setText(tr("Hash identiques")) */
-    /* If the 2 hashes are different : verify->setText(tr("Hash différents")) */
 
     /* 2.6 Footer zone */
     QWidget *footer = new QWidget(page);
@@ -220,15 +214,7 @@ mainWindow::mainWindow() : QWidget()
     QObject::connect(copy, SIGNAL(clicked()), this, SLOT(copyHashToClipboard())); /* Copy hash to clipboard */
     QObject::connect(save, SIGNAL(clicked()), this, SLOT(saveHash())); /* Save Hash in a file */
     QObject::connect(paste, SIGNAL(clicked()), this, SLOT(pasteHashFromClipboard())); /* Paste hash from clipboard */
-
-
-
-
-
-
-
-
-
+    QObject::connect(compare, SIGNAL(clicked()), this, SLOT(verifyHash())); /* Verify is the 2 hashes are identical or not */
     QObject::connect(about, SIGNAL(clicked()), this, SLOT(showHelpWindow())); /* Open help window */
     QObject::connect(quit, SIGNAL(clicked()), this, SLOT(quitApp())); /* Quit application 1/2 */
     QObject::connect(this, SIGNAL(closeApp()), qApp, SLOT(quit()));  /* Quit application 2/2 */
@@ -408,6 +394,7 @@ void mainWindow::showWaitHashWindow()
             {
                 file.close();
 
+                hashResult->setText("");
                 hash = "";
 
                 waitHashWindow appWaitWindow(this);
@@ -453,7 +440,7 @@ void mainWindow::upperCaseState(int state)
 /* Copy hash to clipboard */
 void mainWindow::copyHashToClipboard()
 {
-    if(hash == "")
+    if(hashResult->text() == "")
     {
         QMessageBox::warning(this, tr("Aucun hash calculé"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash calculé...</span><br/>Veuillez choisir un fichier puis calculer son hash en cliquant sur le bouton <span style=\" font-weight:600;\">\"Calculer\"</span> situé dans la zone <span style=\" color:#ff0000;\">3. Hash du fichier</span> ci-dessus.</p></body></html>"));
     }
@@ -468,7 +455,7 @@ void mainWindow::copyHashToClipboard()
 /* Save hash in a file */
 void mainWindow::saveHash()
 {
-    if(hash == "")
+    if(hashResult->text() == "")
     {
         QMessageBox::warning(this, tr("Aucun hash calculé"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash calculé...</span><br/>Veuillez choisir un fichier puis calculer son hash en cliquant sur le bouton <span style=\" font-weight:600;\">\"Calculer\"</span> situé dans la zone <span style=\" color:#ff0000;\">3. Hash du fichier</span> ci-dessus.</p></body></html>"));
     }
@@ -593,25 +580,40 @@ void mainWindow::pasteHashFromClipboard()
     }
     else
     {
-        QMessageBox::warning(this, tr("Aucun hash dans la mémoire tampon"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash dans la mémoire de votre ordinateur...</span><br/>Assurez-vous de bien copier un hash avant de cliquer sur le bouton <span style=\" font-weight:600;\">\"Coller\"</span>.</p></body></html>"));
+        QMessageBox::warning(this, tr("Aucun hash dans la mémoire tampon"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Aucun hash dans la mémoire de votre ordinateur...</span><br/>Assurez-vous de bien avoir copié un hash avant de cliquer sur le bouton <span style=\" font-weight:600;\">\"Coller\"</span>.</p></body></html>"));
     }
 }
 
+/* Verify is the 2 hashes are identical or not */
+void mainWindow::verifyHash()
+{
+    QPalette palette3;
+    palette3.setColor(QPalette::WindowText, QColor(255, 255, 255, 255));
+    verify->setPalette(palette3);
+    icon_verify->setPixmap(QPixmap(""));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if(hashResult->text() != "" && hashInput->text() != "")
+    {
+        if(hashResult->text().toLower() == hashInput->text().toLower())
+        {
+            icon_verify->setPixmap(QPixmap("images/same.png"));
+            palette3.setColor(QPalette::WindowText, QColor(0, 170, 0, 255));
+            verify->setPalette(palette3);
+            verify->setText(tr("Hash identiques"));
+        }
+        else
+        {
+            icon_verify->setPixmap(QPixmap("images/different.png"));
+            palette3.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+            verify->setPalette(palette3);
+            verify->setText(tr("Hash différents"));
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Impossible de lancer une comparaison de hash"), tr("<html><head></head><body><p><span style=\" font-weight:600;\">Il manque des données pour la comparaison...</span><br/>- Veuillez choisir un fichier puis calculer son hash en cliquant sur le bouton <span style=\" font-weight:600;\">\"Calculer\"</span> situé dans la zone <span style=\" color:#ff0000;\">3. Hash du fichier</span> ci-dessus.<br/>- Assurez-vous de bien avoir copié un hash avant de cliquer sur le bouton <span style=\" font-weight:600;\">\"Coller\"</span> situé dans la zone <span style=\" color:#ff0000;\">4. Vérification</span> ci-dessus.</p></body></html>"));
+    }
+}
 
 /* Quit application */
 void mainWindow::quitApp()

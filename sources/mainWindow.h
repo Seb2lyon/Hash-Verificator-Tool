@@ -51,13 +51,8 @@ class mainWindow : public QWidget
         /* Paste hash from clipboard */
         void pasteHashFromClipboard();
 
-
-
-
-
-
-
-
+        /* Verify is the 2 hashes are identical or not */
+        void verifyHash();
 
         /* Call help window */
         void showHelpWindow();
