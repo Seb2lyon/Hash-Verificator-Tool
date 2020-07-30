@@ -4,8 +4,6 @@
 /* Search File window constructor */
 searchFileWindow::searchFileWindow(mainWindow *parent) : QFileDialog()
 {
-    QPalette palette;
-
     setWindowTitle(tr("Hash Verificator Tool - v. 1.0 - Choix du fichier"));
 
     setDirectory(QDir::homePath());

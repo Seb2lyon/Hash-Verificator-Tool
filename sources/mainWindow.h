@@ -45,7 +45,8 @@ class mainWindow : public QWidget
         /* Save Hash in a file */
         void saveHash();
 
-
+        /* Treatment on saving file */
+        void saveFileTreatment(QString completeFilePath);
 
 
 

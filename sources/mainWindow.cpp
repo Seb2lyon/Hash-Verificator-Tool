@@ -237,8 +237,8 @@ mainWindow::mainWindow() : QWidget()
 /* Call search file window */
 void mainWindow::showSearchFileWindow()
 {
-    searchFileWindow fileDialog(this);
-    fileDialog.exec();
+    searchFileWindow searchFileDialog(this);
+    searchFileDialog.exec();
 }
 
 /* Treatment on the selected file */
@@ -248,6 +248,8 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
 
     if(!completeFilePath.isEmpty() && file.open(QIODevice::ReadOnly))
     {
+        hashResult->setText("");
+        hash = "";
         fileSelectedPath = completeFilePath;
         QFileInfo infoFile(fileSelectedPath);
         QString fileName = infoFile.fileName();
@@ -331,6 +333,8 @@ void mainWindow::dropEvent(QDropEvent *event)
     {
         const QUrl url = urlList.at(0);
         fileSelectedPath = url.toLocalFile();
+        hashResult->setText("");
+        hash = "";
 
         QFileInfo infoFile(fileSelectedPath);
         QString fileName = infoFile.fileName();
@@ -357,21 +361,29 @@ void mainWindow::dropEvent(QDropEvent *event)
 void mainWindow::hashSelectedMD4()
 {
     hashAlgorith = "Md4";
+    hashResult->setText("");
+    hash = "";
 }
 
 void mainWindow::hashSelectedMD5()
 {
     hashAlgorith = "Md5";
+    hashResult->setText("");
+    hash = "";
 }
 
 void mainWindow::hashSelectedSHA1()
 {
     hashAlgorith = "Sha1";
+    hashResult->setText("");
+    hash = "";
 }
 
 void mainWindow::hashSelectedSHA256()
 {
     hashAlgorith = "Sha256";
+    hashResult->setText("");
+    hash = "";
 }
 
 /* Call wait hash window */
@@ -462,17 +474,105 @@ void mainWindow::saveHash()
     }
     else
     {
+        QFile file(fileSelectedPath);
+        QFileInfo fileInfo(file);
+
+        int fileSize;
+        int convertFileSize;
+        QString unit;
+
+        fileSize = fileInfo.size();
+        
+        if(fileSize >= 1000000000)
+        {
+        	convertFileSize = fileSize / 1000000000;
+            unit = " Go";
+        }
+        else if(fileSize >= 1000000)
+        {
+        	convertFileSize = fileSize / 1000000;
+            unit = " Mo";
+        }
+        else if(fileSize >= 1000)
+        {
+        	convertFileSize = fileSize / 1000;
+            unit = " Ko";
+        }
+        else
+        {
+            convertFileSize = fileSize;
+            unit = " o";
+        }
+
+        QString stringSize;
+        stringSize.setNum(convertFileSize);
+        QString completeStringSize;
+        completeStringSize.setNum(fileSize);
+
         contentFile = new QString;
         contentFile->append("=====================================================================\n");
         contentFile->append(tr("Généré par le logiciel Hash Verificator Tool v. 1.0\n"));
         contentFile->append(tr("Le "));
-        contentFile->append(QDateTime::currentDateTime().toString("dd/MM/yyyy HH:mm:ss"));
+        contentFile->append(QDateTime::currentDateTime().toString(tr("dd/MM/yyyy à HH:mm:ss")));
         contentFile->append("\n");
         contentFile->append(tr("Créé et développé par Seb2lyon\n"));
         contentFile->append("http://seb2lyon.info.free.fr\n");
         contentFile->append("=====================================================================\n\n");
+        contentFile->append(tr("Nom du fichier : "));
+		contentFile->append(fileInfo.fileName());
+		contentFile->append("\n");
+        contentFile->append(tr("Chemin d'accès : "));
+		contentFile->append(fileInfo.absoluteFilePath());
+        contentFile->append("\n");
+        contentFile->append(tr("Taille : "));
+        if(unit != " o")
+        {
+            contentFile->append(completeStringSize);
+            contentFile->append(" octets (");
+        }
+        contentFile->append(stringSize);
+		contentFile->append(unit);
+        if(unit != " o")
+        {
+            contentFile->append(")");
+        }
+        contentFile->append("\n");
+        contentFile->append(tr("Date de création : "));
+		contentFile->append(fileInfo.birthTime().toString(tr("dd/MM/yyyy HH:mm:ss")));
+        contentFile->append("\n");
+        contentFile->append(tr("Date de modification : "));
+        contentFile->append(fileInfo.lastModified().toString(tr("dd/MM/yyyy HH:mm:ss")));
+        contentFile->append("\n");
+        contentFile->append(tr("Date de dernier accès : "));
+		contentFile->append(fileInfo.lastRead().toString(tr("dd/MM/yyyy HH:mm:ss")));
+        contentFile->append("\n");
+        contentFile->append("Hash ");
+        contentFile->append(hashAlgorith);
+        contentFile->append(" : ");
+        contentFile->append(hash);
+        contentFile->append("\n\n=====================================================================\n\n");
+
+        QString filePath;
+        QFileDialog saveFileDialog;
+        filePath = saveFileDialog.getSaveFileName(this, tr("Hash Verificator Tool - v. 1.0 - Enregistrer le fichier"), QDir::homePath(), tr("Fichier texte (*.txt)"));
+        saveFileTreatment(filePath);
     }
 }
+
+/* Treatment on saving file */
+void mainWindow::saveFileTreatment(QString completeFilePath)
+{
+    QFile saveHashFile(completeFilePath);
+    if(saveHashFile.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&saveHashFile);
+        out << *contentFile;
+    }
+}
+
+
+
+
 
 
 
