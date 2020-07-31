@@ -38,7 +38,7 @@ helpWindow::helpWindow(mainWindow *parent) : QDialog(parent)
     QLabel *appDate = new QLabel(header);
     appDate->setGeometry(0, 37, 400, 16);
     appDate->setFont(QFont("Arial", 9, QFont::Normal, true));
-    appDate->setText(tr("20/01/2020"));
+    appDate->setText(tr("05/08/2020"));
     appDate->setAlignment(Qt::AlignCenter);
 
     /* User guide zone */

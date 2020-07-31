@@ -2,7 +2,7 @@
  *      Hash Verificator Tool v. 1.0      *
  *                 -------                *
  *            Coder : Seb2lyon            *
- *     from 18-01-2020 to XX-XX-2020      *
+ *     from 18-01-2020 to 05-08-2020      *
  *                                        *
  *                Enjoy ;)                *
  *****************************************/
@@ -14,12 +14,12 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QString locale = QLocale::system().name().section('_', 0, 0);
+    QString local = QLocale::system().name().section('_', 0, 0);
 
-    QTranslator translator1;
-    translator1.load(QString("qt_") + locale, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QTranslator translator;
+    translator.load(QString("config/Hash-Verificator-Tool_" + local));
 
-    app.installTranslator(&translator1);
+    app.installTranslator(&translator);
 
     mainWindow appWindow;
     appWindow.show();

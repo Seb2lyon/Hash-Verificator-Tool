@@ -259,6 +259,8 @@ void mainWindow::selectedFileTreatment(QString completeFilePath)
     else
     {
         fileSelectedPath = "";
+        hash = "";
+        hashResult->setText("");
         QPalette palette2;
         palette2.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
         fileToChoose->setPalette(palette2);
@@ -279,8 +281,10 @@ void mainWindow::dragEnterEvent(QDragEnterEvent *event)
     }
     else
     {
-        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
         fileSelectedPath = "";
+        hash = "";
+        hashResult->setText("");
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
         QPalette palette2;
         palette2.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
         fileToChoose->setPalette(palette2);
@@ -297,8 +301,10 @@ void mainWindow::dropEvent(QDropEvent *event)
 
     if(urlList.isEmpty() || nbrUrl == 0)
     {
-        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
         fileSelectedPath = "";
+        hash = "";
+        hashResult->setText("");
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
         QPalette palette1;
         palette1.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
         fileToChoose->setPalette(palette1);
@@ -307,8 +313,10 @@ void mainWindow::dropEvent(QDropEvent *event)
     }
     else if(nbrUrl > 1)
     {
-        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Vous ne pouvez sélectionner qu'un seul fichier...</span><br/>Veuillez réessayer !</body></html>"));
         fileSelectedPath = "";
+        hash = "";
+        hashResult->setText("");
+        QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Vous ne pouvez sélectionner qu'un seul fichier...</span><br/>Veuillez réessayer !</body></html>"));
         QPalette palette1;
         palette1.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
         fileToChoose->setPalette(palette1);
@@ -323,22 +331,37 @@ void mainWindow::dropEvent(QDropEvent *event)
         hash = "";
 
         QFileInfo infoFile(fileSelectedPath);
-        QString fileName = infoFile.fileName();
-        int fileNameSize = fileName.size();
-        QPalette palette1;
-        palette1.setColor(QPalette::WindowText, QColor(0, 0, 255, 255));
-        fileToChoose->setPalette(palette1);
-
-        if(fileNameSize > 30)
+        if(!infoFile.isFile())
         {
-            QString shortName = fileName.mid(0, 25) + " (...)";
-            fileToChoose->setText(shortName);
-            fileToChoose->setToolTip(fileName);
+            fileSelectedPath = "";
+            hash = "";
+            hashResult->setText("");
+            QMessageBox::critical(this, tr("Erreur"), tr("<html><head></head><body><span style=\" font-weight:600;\">Aucun fichier valide sélectionné...</span><br/>Veuillez réessayer !</body></html>"));
+            QPalette palette1;
+            palette1.setColor(QPalette::WindowText, QColor(255, 0, 0, 255));
+            fileToChoose->setPalette(palette1);
+            fileToChoose->setText(tr("Aucun fichier sélectionné"));
+            fileToChoose->setToolTip("");
         }
         else
         {
-            fileToChoose->setText(fileName);
-            fileToChoose->setToolTip("");
+            QString fileName = infoFile.fileName();
+            int fileNameSize = fileName.size();
+            QPalette palette1;
+            palette1.setColor(QPalette::WindowText, QColor(0, 0, 255, 255));
+            fileToChoose->setPalette(palette1);
+
+            if(fileNameSize > 30)
+            {
+                QString shortName = fileName.mid(0, 25) + " (...)";
+                fileToChoose->setText(shortName);
+                fileToChoose->setToolTip(fileName);
+            }
+            else
+            {
+                fileToChoose->setText(fileName);
+                fileToChoose->setToolTip("");
+            }
         }
     }
 }
@@ -473,22 +496,22 @@ void mainWindow::saveHash()
         if(fileSize >= 1000000000)
         {
         	convertFileSize = fileSize / 1000000000;
-            unit = " Go";
+            unit = tr(" Go");
         }
         else if(fileSize >= 1000000)
         {
         	convertFileSize = fileSize / 1000000;
-            unit = " Mo";
+            unit = tr(" Mo");
         }
         else if(fileSize >= 1000)
         {
         	convertFileSize = fileSize / 1000;
-            unit = " Ko";
+            unit = tr(" Ko");
         }
         else
         {
             convertFileSize = fileSize;
-            unit = " o";
+            unit = tr(" o");
         }
 
         QString stringSize;
@@ -515,11 +538,11 @@ void mainWindow::saveHash()
         if(unit != " o")
         {
             contentFile->append(completeStringSize);
-            contentFile->append(" octets (");
+            contentFile->append(tr(" octets ("));
         }
         contentFile->append(stringSize);
 		contentFile->append(unit);
-        if(unit != " o")
+        if(unit != tr(" o"))
         {
             contentFile->append(")");
         }

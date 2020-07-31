@@ -10,7 +10,7 @@ class helpWindow : public QDialog
 
     public:
         helpWindow(mainWindow *parent);
-        void closeEvent(QCloseEvent *event);
+        void closeEvent(QCloseEvent *event); /* Close window */
 };
 
 #endif // HELPWINDOW_H

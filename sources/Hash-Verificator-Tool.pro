@@ -14,3 +14,10 @@ HEADERS += \
     mainWindow.h \
     searchFileWindow.h \
     waitHashWindow.h
+
+OTHER_FILES += \
+    ressources.rc
+
+RC_FILE = ressources.rc
+
+TRANSLATIONS = Hash-Verificator-Tool_en.ts
