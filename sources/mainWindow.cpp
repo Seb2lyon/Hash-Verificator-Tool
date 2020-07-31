@@ -535,7 +535,7 @@ void mainWindow::saveHash()
 		contentFile->append(fileInfo.absoluteFilePath());
         contentFile->append("\n");
         contentFile->append(tr("Taille : "));
-        if(unit != " o")
+        if(unit != tr(" o"))
         {
             contentFile->append(completeStringSize);
             contentFile->append(tr(" octets ("));

@@ -21,11 +21,12 @@
     <message>
         <location filename="helpWindow.cpp" line="54"/>
         <source>    Mode d&apos;emploi</source>
-        <translation>    Instructions</translation>
+        <translation>    User manual</translation>
     </message>
     <message>
         <location filename="helpWindow.cpp" line="59"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;1. Fichier à vérifier : &lt;/span&gt;sélectionnez le fichier sur votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Rechercher&lt;/span&gt; (ou faites un glisser/déposer de ce fichier dans la fenêtre du logiciel).&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;2. Choix de l&apos;algorithme : &lt;/span&gt;sélectionnez l’algorithme de hash en cliquant sur la puce souhaitée.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;3. Hash du fichier : &lt;/span&gt;lancer le calcul du hash du fichier en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Calculer&lt;/span&gt;.&lt;br/&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ATTENTION&lt;/span&gt; : le processus peut être très long en fonction de la taille du fichier sélectionné.&lt;br/&gt;Une fois le hash obtenu, il s’affiche dans la ligne de formulaire du logiciel.&lt;br/&gt;- Vous pourrez alors l’afficher en majuscule ou en minuscule en cochant la &lt;span style=&quot; font-weight:600;&quot;&gt;case Majuscule&lt;/span&gt; ou en la décochant.&lt;br/&gt;- Vous pourrez également copier le hash affiché dans la mémoire tampon de votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Copier&lt;/span&gt;.&lt;br/&gt;- Vous pourrez enfin cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Enregistrer &lt;/span&gt;afin de générer automatiquement un document texte (.txt) qui résumera toutes les caractéristiques de votre fichier (ainsi que son hash). Après avoir donné un nom à ce document, il sera enregistré sur votre disque dur à l’emplacement de votre choix.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;4. Vérification : &lt;/span&gt;si vous le souhaitez, vous pourrez comparer la hash généré avec un autre hash que vous collerez dans la ligne du formulaire du logiciel. Cela vous permettra de vérifier l’intégrité de votre fichier.&lt;br/&gt;Vous pourrez coller un hash précédemment copié (site le site de téléchargement de votre fichier, par exemple) en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Coller&lt;/span&gt; du logiciel, ou en faisant un clic-droit dans la case puis en sélectionnant « Coller » dans le menu contextuel.&lt;br/&gt;Vous pourrez ensuite cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Comparer&lt;/span&gt; afin de vérifier si les deux hash sont identiques.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;N’hésitez pas à visiter mon site web : &lt;a href=&quot;http://seb2lyon.info.free.fr/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://seb2lyon.info.free.fr&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic; color:#000000;&quot;&gt;Enjoy :-)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;1. Fichier à vérifier : &lt;/span&gt;sélectionnez le fichier sur votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Rechercher&lt;/span&gt; (ou faites un glisser/déposer de ce fichier dans la fenêtre du logiciel).&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;2. Choix de l&apos;algorithme : &lt;/span&gt;sélectionnez l’algorithme de hash en cliquant sur la puce souhaitée.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;3. Hash du fichier : &lt;/span&gt;lancer le calcul du hash du fichier en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Calculer&lt;/span&gt;.&lt;br/&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ATTENTION&lt;/span&gt; : le processus peut être très long en fonction de la taille du fichier sélectionné.&lt;br/&gt;Une fois le hash obtenu, il s’affiche dans la ligne de formulaire du logiciel.&lt;br/&gt;- Vous pourrez alors l’afficher en majuscule ou en minuscule en cochant la &lt;span style=&quot; font-weight:600;&quot;&gt;case Majuscule&lt;/span&gt; ou en la décochant.&lt;br/&gt;- Vous pourrez également copier le hash affiché dans la mémoire tampon de votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Copier&lt;/span&gt;.&lt;br/&gt;- Vous pourrez enfin cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Enregistrer &lt;/span&gt;afin de générer automatiquement un document texte (.txt) qui résumera toutes les caractéristiques de votre fichier (ainsi que son hash). Après avoir donné un nom à ce document, il sera enregistré sur votre disque dur à l’emplacement de votre choix.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;4. Vérification : &lt;/span&gt;si vous le souhaitez, vous pourrez comparer la hash généré avec un autre hash que vous collerez dans la ligne du formulaire du logiciel. Cela vous permettra de vérifier l’intégrité de votre fichier.&lt;br/&gt;Vous pourrez coller un hash précédemment copié (sur le site de téléchargement de votre fichier, par exemple) en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Coller&lt;/span&gt; du logiciel, ou en faisant un clic-droit dans la case puis en sélectionnant « Coller » dans le menu contextuel.&lt;br/&gt;Vous pourrez ensuite cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Comparer&lt;/span&gt; afin de vérifier si les deux hash sont identiques.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;N’hésitez pas à visiter mon site web : &lt;a href=&quot;http://seb2lyon.info.free.fr/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://seb2lyon.info.free.fr&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic; color:#000000;&quot;&gt;Enjoy :-)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;1. Fichier à vérifier : &lt;/span&gt;sélectionnez le fichier sur votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Rechercher&lt;/span&gt; (ou faites un glisser/déposer de ce fichier dans la fenêtre du logiciel).&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;2. Choix de l&apos;algorithme : &lt;/span&gt;sélectionnez l’algorithme de hash en cliquant sur la puce souhaitée.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;3. Hash du fichier : &lt;/span&gt;lancer le calcul du hash du fichier en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Calculer&lt;/span&gt;.&lt;br/&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline;&quot;&gt;ATTENTION&lt;/span&gt; : le processus peut être très long en fonction de la taille du fichier sélectionné.&lt;br/&gt;Une fois le hash obtenu, il s’affiche dans la ligne de formulaire du logiciel.&lt;br/&gt;- Vous pourrez alors l’afficher en majuscule ou en minuscule en cochant la &lt;span style=&quot; font-weight:600;&quot;&gt;case Majuscule&lt;/span&gt; ou en la décochant.&lt;br/&gt;- Vous pourrez également copier le hash affiché dans la mémoire tampon de votre ordinateur en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Copier&lt;/span&gt;.&lt;br/&gt;- Vous pourrez enfin cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Enregistrer &lt;/span&gt;afin de générer automatiquement un document texte (.txt) qui résumera toutes les caractéristiques de votre fichier (ainsi que son hash). Après avoir donné un nom à ce document, il sera enregistré sur votre disque dur à l’emplacement de votre choix.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;4. Vérification : &lt;/span&gt;si vous le souhaitez, vous pourrez comparer la hash généré avec un autre hash que vous collerez dans la ligne du formulaire du logiciel. Cela vous permettra de vérifier l’intégrité de votre fichier.&lt;br/&gt;Vous pourrez coller un hash précédemment copié (site le site de téléchargement de votre fichier, par exemple) en cliquant sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Coller&lt;/span&gt; du logiciel, ou en faisant un clic-droit dans la case puis en sélectionnant « Coller » dans le menu contextuel.&lt;br/&gt;Vous pourrez ensuite cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;Comparer&lt;/span&gt; afin de vérifier si les deux hash sont identiques.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;N’hésitez pas à visiter mon site web : &lt;a href=&quot;http://seb2lyon.info.free.fr/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://seb2lyon.info.free.fr&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic; color:#000000;&quot;&gt;Enjoy :-)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -46,7 +47,9 @@
         <source>Ce logiciel vous permettra de calculer la signature numérique de vos fichiers
 téléchargés afin de vérifier leur intégrité.
 Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; (en bas à droite).</source>
-        <translation type="unfinished"></translation>
+        <translation>This program will allow you to calculate the digital signature of your downloaded
+files in order to check their integrity.
+The user manual is available by clicking on the &quot;Help&quot; button (bottom right).</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="56"/>
@@ -91,12 +94,12 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
     <message>
         <location filename="mainWindow.cpp" line="142"/>
         <source>Majuscule</source>
-        <translation type="unfinished"></translation>
+        <translation>Uppercase</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="147"/>
         <source>4. Vérification</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Verification</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="162"/>
@@ -121,7 +124,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
         <location filename="mainWindow.cpp" line="323"/>
         <location filename="mainWindow.cpp" line="343"/>
         <source>Aucun fichier sélectionné</source>
-        <translation type="unfinished"></translation>
+        <translation>No file selected</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="269"/>
@@ -130,7 +133,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
         <location filename="mainWindow.cpp" line="319"/>
         <location filename="mainWindow.cpp" line="339"/>
         <source>Erreur</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="269"/>
@@ -148,7 +151,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
     <message>
         <location filename="mainWindow.cpp" line="403"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="403"/>
@@ -158,7 +161,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
     <message>
         <location filename="mainWindow.cpp" line="413"/>
         <source>Fichier vide</source>
-        <translation type="unfinished"></translation>
+        <translation>Empty file</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="413"/>
@@ -169,7 +172,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
         <location filename="mainWindow.cpp" line="468"/>
         <location filename="mainWindow.cpp" line="483"/>
         <source>Aucun hash calculé</source>
-        <translation type="unfinished"></translation>
+        <translation>No hash calculated</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="468"/>
@@ -180,7 +183,7 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
     <message>
         <location filename="mainWindow.cpp" line="474"/>
         <source>Copie dans la mémoire tampon</source>
-        <translation type="unfinished"></translation>
+        <translation>Copy to clipboard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="474"/>
@@ -204,108 +207,111 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
     </message>
     <message>
         <location filename="mainWindow.cpp" line="514"/>
+        <location filename="mainWindow.cpp" line="538"/>
         <location filename="mainWindow.cpp" line="545"/>
         <source> o</source>
-        <translation type="unfinished"></translation>
+        <translation> B</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="524"/>
         <source>Généré par le logiciel Hash Verificator Tool v. 1.0
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Generated by Hash Verificator Tool v. 1.0
+</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="525"/>
         <source>Le </source>
-        <translation type="unfinished"></translation>
+        <translation>On </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="526"/>
         <source>dd/MM/yyyy à HH:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>MM/dd/yyyy at HH:mm:ss</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="528"/>
         <source>Créé et développé par Seb2lyon
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Created and developped by Seb2lyon
+</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="531"/>
         <source>Nom du fichier : </source>
-        <translation type="unfinished"></translation>
+        <translation>File&apos;s name : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="534"/>
         <source>Chemin d&apos;accès : </source>
-        <translation type="unfinished"></translation>
+        <translation>Path : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="537"/>
         <source>Taille : </source>
-        <translation type="unfinished"></translation>
+        <translation>Size : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="541"/>
         <source> octets (</source>
-        <translation type="unfinished"></translation>
+        <translation> bytes (</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="550"/>
         <source>Date de création : </source>
-        <translation type="unfinished"></translation>
+        <translation>Creation date : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="551"/>
         <location filename="mainWindow.cpp" line="554"/>
         <location filename="mainWindow.cpp" line="557"/>
         <source>dd/MM/yyyy HH:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>MM/dd/yyyy HH:mm:ss</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="553"/>
         <source>Date de modification : </source>
-        <translation type="unfinished"></translation>
+        <translation>Modification date : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="556"/>
         <source>Date de dernier accès : </source>
-        <translation type="unfinished"></translation>
+        <translation>Date of last access : </translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="567"/>
         <source>Hash Verificator Tool - v. 1.0 - Enregistrer le fichier</source>
-        <translation type="unfinished"></translation>
+        <translation>Hash Verificator Tool - v. 1.0 - Save the file</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="567"/>
         <source>Fichier texte (*.txt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Text file (*.txt)</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="606"/>
         <source>Aucun hash dans la mémoire tampon</source>
-        <translation type="unfinished"></translation>
+        <translation>No hash stored in the clipboard</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="606"/>
         <source>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Aucun hash dans la mémoire de votre ordinateur...&lt;/span&gt;&lt;br/&gt;Assurez-vous de bien avoir copié un hash avant de cliquer sur le bouton &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;Coller&quot;&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;No hash strored in your computer clipboard...&lt;/span&gt;&lt;br/&gt;Make sure you have copied a hash before clicking on the &lt;span style=&quot; font-weight:600;&quot;&gt;&quot;Paste&quot;&lt;/span&gt; button.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="625"/>
         <source>Hash identiques</source>
-        <translation type="unfinished"></translation>
+        <translation>Identical hashes</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="632"/>
         <source>Hash différents</source>
-        <translation type="unfinished"></translation>
+        <translation>Different hashes</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="637"/>
         <source>Impossible de lancer une comparaison de hash</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannot run hash comparison</translation>
     </message>
     <message>
         <location filename="mainWindow.cpp" line="637"/>
@@ -316,7 +322,8 @@ Le mode d&apos;emploi est disponible en cliquant sur le bouton &quot;Aide&quot; 
         <location filename="mainWindow.cpp" line="644"/>
         <source>Voulez-vous vraiment quitter l&apos;application
 Hash Verificator Tool ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Are you sure you want to exit the app
+Hash Verificator Tool ?</translation>
     </message>
 </context>
 <context>
