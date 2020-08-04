@@ -26,7 +26,7 @@ mainWindow::mainWindow() : QWidget()
 
     /* 1. Banner */
     QLabel *banner = new QLabel(this);
-    banner->setPixmap(QPixmap("images/banner.jpeg"));
+    banner->setPixmap(QPixmap("images/banner.png"));
     banner->setGeometry(0, 0, 500, 100);
     banner->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 

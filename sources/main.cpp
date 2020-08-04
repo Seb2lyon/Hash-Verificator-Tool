@@ -17,9 +17,21 @@ int main(int argc, char *argv[])
     QString local = QLocale::system().name().section('_', 0, 0);
 
     QTranslator translator;
-    translator.load(QString("config/Hash-Verificator-Tool_" + local));
+
+    if(local == "en")
+    {
+        translator.load(QString("config/Hash-Verificator-Tool_") + local);
+    }
+    else
+    {
+        translator.load(QString("qt_") + local, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    }
 
     app.installTranslator(&translator);
+
+
+
+
 
     mainWindow appWindow;
     appWindow.show();
