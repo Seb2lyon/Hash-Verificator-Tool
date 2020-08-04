@@ -18,20 +18,9 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
 
-    if(local == "en")
-    {
-        translator.load(QString("config/Hash-Verificator-Tool_") + local);
-    }
-    else
-    {
-        translator.load(QString("qt_") + local, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    }
+    translator.load(QString("config/Hash-Verificator-Tool_") + local);
 
     app.installTranslator(&translator);
-
-
-
-
 
     mainWindow appWindow;
     appWindow.show();
